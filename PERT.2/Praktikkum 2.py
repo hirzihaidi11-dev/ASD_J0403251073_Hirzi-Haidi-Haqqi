@@ -109,7 +109,7 @@ def simpan_data(nama_file,data_dict):
             nama = data_dict[nim]["nama"]
             nilai = data_dict[nim]["nilai"]
             file.write(f"{nim},{nama},{nilai}\n")
-            print("Data Berhasil Disimpan")
+        print("Data Berhasil Disimpan")
 
 # simpan_data(nama_file, buka_data)
 # print("Data Berhasil Disimpan")
