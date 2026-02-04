@@ -8,3 +8,5 @@ BRG007,Fanta,25
 BRG008,CocaCola,45
 BRG009,Sprite,65
 BRG010,Mizone,10
+BRG011,Malkist,65
+BRG012,Cheetos,85

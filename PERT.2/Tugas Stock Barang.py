@@ -59,7 +59,7 @@ def cari_data(data_dict):
         print("\n Data Tidak Ditemukan")
 
 ###!!! Tugas Praktikkum 2 : Konsep ADT dan File Handling(Studi Kasus) !!!###
-#Tahap 4 : Membuat Fungsi Update Nilai
+#Tahap 4 : Membuat Fungsi Update Stock Barang
 #-------------------------------------------------------#
 
 def update_stock(data_dict):
@@ -94,7 +94,35 @@ def simpan_data(nama_file,data_dict):
     print("Data Berhasil Disimpan")
 
 ###!!! Tugas Praktikkum 2 : Konsep ADT dan File Handling(Studi Kasus) !!!###
-#Tahap 6 : Membuat Menu Program
+#Tahap 6 : Membuat Fungsi Menambahkan Barang
+#-------------------------------------------------------#
+
+def tambah_data(data_dict):
+    kode = input("Masukkan Kode Barang Baru (BRGXXX): ").strip()
+
+    # cek apakah kode sudah ada
+    if kode in data_dict:
+        print("Kode sudah ada. Penambahan dibatalkan.")
+        return
+
+    nama = input("Masukkan Nama Barang: ").strip()
+
+    try:
+        stock = int(input("Masukkan Stock Awal: ").strip())
+    except ValueError:
+        print("Stock harus berupa angka.")
+        return
+
+    # simpan ke dictionary
+    data_dict[kode] = {
+        "nama": nama,
+        "stock": stock
+    }
+
+    print("Barang berhasil ditambahkan.")
+
+###!!! Tugas Praktikkum 2 : Konsep ADT dan File Handling(Studi Kasus) !!!###
+#Tahap 7 : Membuat Menu Program
 #-------------------------------------------------------#
 
 def main():
@@ -106,6 +134,7 @@ def main():
         print("2. Cari Data Berdasarkan Kode Barang")
         print("3. Update Stock Barang")
         print("4. Simpan Data ke File")
+        print("5. Menambahkan Data Barang")
         print("0. Keluar")
 
         pilihan = input("Pilihan Menu: ").strip()
@@ -118,6 +147,8 @@ def main():
             update_stock(buka_data)
         elif pilihan == "4":
             simpan_data(nama_file, buka_data)
+        elif pilihan == "5":
+            tambah_data(buka_data)
         elif pilihan == "0":
             print("Program Selesai")
             break
