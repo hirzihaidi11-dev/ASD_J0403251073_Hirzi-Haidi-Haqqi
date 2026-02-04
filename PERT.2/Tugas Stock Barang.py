@@ -1,10 +1,10 @@
-###!!! Praktikkum 2 : Konsep ADT dan File Handling(Studi Kasus) !!!###
-#Latihan Dasar 1 : Membuat Fungsi Load Data
+###!!! Tugas Praktikkum 2 : Konsep ADT dan File Handling(Studi Kasus) !!!###
+#Tahap 1 : Membuat Fungsi Load Data
 #-------------------------------------------------------#
 
 nama_file="Stock_barang.txt"
 
-#membuat fungsi bacadata mahasiswa
+#membuat fungsi bacadata barang 
 def baca_data_barang(nama_file):
     data_dict = {} #Insisialisasi Data Dictionary
 
@@ -12,50 +12,39 @@ def baca_data_barang(nama_file):
          for baris in file:
             baris = baris.strip()
             kode, nama, stock = baris.split(",") #parsing data berdasarkan karakter (,)
-            #Simpan Sebagai list "[nim,nama,nilai]"
+            #Simpan Sebagai list "[kode,nama,stock]"
             data_dict[kode] = {
                 "nama" : nama,
                 "stock" : int(stock)
             }
     return data_dict
 
-#memanggil fungsi baca_data_mahasiswa
-# buka_data = baca_data_mahasiswa(nama_file)
-# print("Jumlah data terbaca", len(buka_data))
-
-###!!! Praktikkum 2 : Konsep ADT dan File Handling(Studi Kasus) !!!###
-#Latihan Dasar 2 : Membuat Fungsi Menampilkan Data
+###!!! Tugas Praktikkum 2 : Konsep ADT dan File Handling(Studi Kasus) !!!###
+#Tahap 2 : Membuat Fungsi Menampilkan Data
 #-------------------------------------------------------#
 
 def tampilkan_data(data_dict):
 
     if len(data_dict) == 0:
-        print("Tidak ada data mahasiswa")
+        print("Tidak ada data Barang")
         return
 
     #membuat Header Tabel
     print("==== Daftar Stock Barang ====")
-    print(f"({"Kode" :<10} | {"Nama": <12} | {"Stock": >5}")
+    print(f"{"Kode" :<10} | {"Nama": <12} | {"Stock": >5}")
     print("-" * 32)
-    
-    
-    #Untuk tampilan yang rapi, atur f-string formatting
         
-
     for kode in sorted(data_dict.keys()):
         nama=data_dict[kode]["nama"]
         stock=data_dict[kode]["stock"]
         print(f"{kode: <10} | {nama: <12} | {stock: >5}")
 
-#memanggil fungsi tampilkan_data
-# tampilkan_data(buka_data)
-
-###!!! Praktikkum 2 : Konsep ADT dan File Handling(Studi Kasus) !!!###
-#Latihan Dasar 3 : Membuat Fungsi Mencari Data
+###!!! Tugas Praktikkum 2 : Konsep ADT dan File Handling(Studi Kasus) !!!###
+#Tahap 3 : Membuat Fungsi Mencari Data
 #-------------------------------------------------------#
 
 def cari_data(data_dict):
-    #mencari data mahasiswa berdasarkan NIM
+    #mencari data barang berdasarkan kode barang
     kode_cari = input("Masukkan Kode Barang yang dicari:").strip()
 
     if kode_cari in data_dict:
@@ -69,16 +58,14 @@ def cari_data(data_dict):
     else :
         print("\n Data Tidak Ditemukan")
 
-# cari_data(buka_data)
-
-###!!! Praktikkum 2 : Konsep ADT dan File Handling(Studi Kasus) !!!###
-#Latihan Dasar 4 : Membuat Fungsi Update Nilai
+###!!! Tugas Praktikkum 2 : Konsep ADT dan File Handling(Studi Kasus) !!!###
+#Tahap 4 : Membuat Fungsi Update Nilai
 #-------------------------------------------------------#
 
 def update_stock(data_dict):
-    kode = input("Masukkan Kode Barang yang akan diupdate stocknya").strip()
+    kode = input("Masukkan Kode Barang yang akan diupdate stocknya:").strip()
     
-    #cari nim yang akan diupdate nilainya
+    #cari kode barang yang akan diupdate stocknya
     if kode not in data_dict :
         print("Kode Barang tidak ditemukan, update dibatalkan")
         return
@@ -88,19 +75,14 @@ def update_stock(data_dict):
         print("Stock harus berupa angka. Update dibatalkan")
         return
     
-    #if stock_baru < 0 or stock_baru >100 :
-        #print("Nilharus diantara 0 sampai 100. Update dibatalkan")
-
     stock_lama = data_dict[kode]["stock"]
-    #memasukkan nilai update baru ke dictionary
+    #memasukkan stock update baru ke dictionary
     data_dict[kode]["stock"] = stock_baru
 
-    print(f"Update berhail. nilai {kode} berubah dari {stock_lama} menjadi {stock_baru}")
+    print(f"Update berhail. stock {kode} berubah dari {stock_lama} menjadi {stock_baru}")
 
-# update_nilai(buka_data)
-
-###!!! Praktikkum 2 : Konsep ADT dan File Handling(Studi Kasus) !!!###
-#Latihan Dasar 5 : Membuat Fungsi Menyimpan perubahan data ke file
+###!!! Tugas Praktikkum 2 : Konsep ADT dan File Handling(Studi Kasus) !!!###
+#Tahap 5 : Membuat Fungsi Menyimpan perubahan data ke file
 #-------------------------------------------------------#
 
 def simpan_data(nama_file,data_dict):
@@ -111,11 +93,8 @@ def simpan_data(nama_file,data_dict):
             file.write(f"{kode},{nama},{stock}\n")
     print("Data Berhasil Disimpan")
 
-# simpan_data(nama_file, buka_data)
-# print("Data Berhasil Disimpan")
-
-###!!! Praktikkum 2 : Konsep ADT dan File Handling(Studi Kasus) !!!###
-#Latihan Dasar 6 : Membuat Menu Program
+###!!! Tugas Praktikkum 2 : Konsep ADT dan File Handling(Studi Kasus) !!!###
+#Tahap 6 : Membuat Menu Program
 #-------------------------------------------------------#
 
 def main():
@@ -123,7 +102,7 @@ def main():
 
     while True :
         print("\n=== MENU DATA STOCK BARANG ===")
-        print("1. Tampilkan semua data")
+        print("1. Tampilkan Semua Data")
         print("2. Cari Data Berdasarkan Kode Barang")
         print("3. Update Stock Barang")
         print("4. Simpan Data ke File")

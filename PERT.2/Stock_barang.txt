@@ -2,7 +2,7 @@ BRG001,Nabati,30
 BRG002,Kinderjoy,20
 BRG003,Momogi,50
 BRG004,Tango,40
-BRG005,Quaker,5000
+BRG005,Quaker,38
 BRG006,Kitkat,78
 BRG007,Fanta,25
 BRG008,CocaCola,45
