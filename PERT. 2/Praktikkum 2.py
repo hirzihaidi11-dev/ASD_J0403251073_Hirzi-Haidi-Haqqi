@@ -1,5 +1,5 @@
 ###!!! Praktikkum 2 : Konsep ADT dan File Handling(Studi Kasus) !!!###
-#Latihan Dasar 1 : Membuat Fungsi Load Data MAWDAAAAA
+#Latihan Dasar 1 : Membuat Fungsi Load Data 
 #-------------------------------------------------------#
 
 nama_file="Data_mahasiswa.txt"
