@@ -109,7 +109,7 @@ def simpan_data(nama_file,data_dict):
             nama = data_dict[kode]["nama"]
             stock = data_dict[kode]["stock"]
             file.write(f"{kode},{nama},{stock}\n")
-            print("Data Berhasil Disimpan")
+    print("Data Berhasil Disimpan")
 
 # simpan_data(nama_file, buka_data)
 # print("Data Berhasil Disimpan")
@@ -139,7 +139,6 @@ def main():
             update_stock(buka_data)
         elif pilihan == "4":
             simpan_data(nama_file, buka_data)
-            print("Data Stock Barang Tersimpan")
         elif pilihan == "0":
             print("Program Selesai")
             break
