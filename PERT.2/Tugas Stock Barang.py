@@ -59,7 +59,33 @@ def cari_data(data_dict):
         print("\n Data Tidak Ditemukan")
 
 ###!!! Tugas Praktikkum 2 : Konsep ADT dan File Handling(Studi Kasus) !!!###
-#Tahap 4 : Membuat Fungsi Update Stock Barang
+#Tahap 4 : Membuat Fungsi Menambahkan Barang
+#-------------------------------------------------------#
+
+def tambah_data(data_dict):
+    kode = input("Masukkan Kode Barang Baru (BRGXXX): ").strip()
+    nama = input("Masukkan Nama Barang: ").strip()
+    # cek apakah kode sudah ada
+    if kode in data_dict:
+        print("Kode sudah ada. Penambahan dibatalkan.")
+        return
+
+    try:
+        stock = int(input("Masukkan Stock Barang: ").strip())
+    except ValueError:
+        print("Stock harus berupa angka.")
+        return
+
+    # simpan ke dictionary
+    data_dict[kode] = {
+        "nama": nama,
+        "stock": stock
+    }
+
+    print("Barang berhasil ditambahkan.")
+
+###!!! Tugas Praktikkum 2 : Konsep ADT dan File Handling(Studi Kasus) !!!###
+#Tahap 5 : Membuat Fungsi Update Stock Barang
 #-------------------------------------------------------#
 
 def update_stock(data_dict):
@@ -82,7 +108,27 @@ def update_stock(data_dict):
     print(f"Update berhail. stock {kode} berubah dari {stock_lama} menjadi {stock_baru}")
 
 ###!!! Tugas Praktikkum 2 : Konsep ADT dan File Handling(Studi Kasus) !!!###
-#Tahap 5 : Membuat Fungsi Menyimpan perubahan data ke file
+#Tahap 6 : Membuat Fungsi Hapus Data Barang
+#-------------------------------------------------------#
+
+def hapus_data(data_dict):
+    kode = input("Masukkan Kode Barang yang akan dihapus: ").strip()
+
+    if kode not in data_dict:
+        print("Kode barang tidak ditemukan.")
+        return
+
+    # Mengonfirmasi untuk melakukan penghapusan data
+    konfirmasi = input(f"Yakin ingin menghapus {kode}? (y/n): ").lower()
+
+    if konfirmasi == "y":
+        del data_dict[kode]
+        print("Data barang berhasil dihapus.")
+    else:
+        print("Penghapusan dibatalkan.")
+
+###!!! Tugas Praktikkum 2 : Konsep ADT dan File Handling(Studi Kasus) !!!###
+#Tahap 7 : Membuat Fungsi Menyimpan perubahan data ke file
 #-------------------------------------------------------#
 
 def simpan_data(nama_file,data_dict):
@@ -94,35 +140,7 @@ def simpan_data(nama_file,data_dict):
     print("Data Berhasil Disimpan")
 
 ###!!! Tugas Praktikkum 2 : Konsep ADT dan File Handling(Studi Kasus) !!!###
-#Tahap 6 : Membuat Fungsi Menambahkan Barang
-#-------------------------------------------------------#
-
-def tambah_data(data_dict):
-    kode = input("Masukkan Kode Barang Baru (BRGXXX): ").strip()
-
-    # cek apakah kode sudah ada
-    if kode in data_dict:
-        print("Kode sudah ada. Penambahan dibatalkan.")
-        return
-
-    nama = input("Masukkan Nama Barang: ").strip()
-
-    try:
-        stock = int(input("Masukkan Stock Awal: ").strip())
-    except ValueError:
-        print("Stock harus berupa angka.")
-        return
-
-    # simpan ke dictionary
-    data_dict[kode] = {
-        "nama": nama,
-        "stock": stock
-    }
-
-    print("Barang berhasil ditambahkan.")
-
-###!!! Tugas Praktikkum 2 : Konsep ADT dan File Handling(Studi Kasus) !!!###
-#Tahap 7 : Membuat Menu Program
+#Tahap 8 : Membuat Menu Program
 #-------------------------------------------------------#
 
 def main():
@@ -132,9 +150,10 @@ def main():
         print("\n=== MENU DATA STOCK BARANG ===")
         print("1. Tampilkan Semua Barang")
         print("2. Cari Barang Berdasarkan Kode")
-        print("3. Update Stock Barang")
-        print("4. Simpan Data ke File")
-        print("5. Tambah Barang Baru")
+        print("3. Tambah Barang Baru")
+        print("4. Update Stock Barang")
+        print("5. Hapus Data Barang")
+        print("6. Simpan Data ke File")
         print("0. Keluar")
 
         pilihan = input("Pilihan Menu: ").strip()
@@ -144,11 +163,13 @@ def main():
         elif pilihan == "2":
             cari_data(buka_data)
         elif pilihan == "3":
-            update_stock(buka_data)
-        elif pilihan == "4":
-            simpan_data(nama_file, buka_data)
-        elif pilihan == "5":
             tambah_data(buka_data)
+        elif pilihan == "4":
+            update_stock(buka_data)
+        elif pilihan == "5":
+            hapus_data(buka_data)
+        elif pilihan == "6":
+            simpan_data(nama_file,buka_data)
         elif pilihan == "0":
             print("Program Selesai")
             break
