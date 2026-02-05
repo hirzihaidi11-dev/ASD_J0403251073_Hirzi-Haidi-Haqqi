@@ -1,8 +1,20 @@
-###!!! Tugas Praktikkum 2 : Konsep ADT dan File Handling(Studi Kasus) !!!###
-#Tahap 1 : Membuat Fungsi Load Data
-#-------------------------------------------------------#
+# =======================================================
+# TUGAS HANDS-ON MODUL 1
+# Studi Kasus: Sistem Stock Barang Kantin (Berbasis File.txt)
+#
+# Nama : Hirzi Haidi Haqqi
+# NIM  : J0403251073
+# Kelas : TPL-B2
+#========================================================
 
+# ---------------------------------------
+# Konstanta Nama File
+# ---------------------------------------
 nama_file="Stock_barang.txt"
+
+# ---------------------------------------
+# Fungsi: Membaca Data dari File
+# ---------------------------------------
 
 #membuat fungsi bacadata barang 
 def baca_data_barang(nama_file):
