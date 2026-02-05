@@ -130,11 +130,11 @@ def main():
 
     while True :
         print("\n=== MENU DATA STOCK BARANG ===")
-        print("1. Tampilkan Semua Data")
-        print("2. Cari Data Berdasarkan Kode Barang")
+        print("1. Tampilkan Semua Barang")
+        print("2. Cari Barang Berdasarkan Kode")
         print("3. Update Stock Barang")
         print("4. Simpan Data ke File")
-        print("5. Menambahkan Data Barang")
+        print("5. Tambah Barang Baru")
         print("0. Keluar")
 
         pilihan = input("Pilihan Menu: ").strip()
