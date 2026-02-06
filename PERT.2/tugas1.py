@@ -16,28 +16,40 @@ nama_file="Stock_barang.txt"
 # Fungsi: Membaca Data dari File
 # ---------------------------------------
 
-#membuat fungsi bacadata barang 
-def baca_data_barang(nama_file):
-    data_dict = {} #Insisialisasi Data Dictionary
+# Membaca data stock dari file teks
+def baca_stock(nama_file):
+    stock_dict = {} #Insisialisasi Data Dictionary
 
     with open(nama_file,"r",encoding="utf-8") as file :
          for baris in file:
             baris = baris.strip()
             kode, nama, stock = baris.split(",") #parsing data berdasarkan karakter (,)
             #Simpan Sebagai list "[kode,nama,stock]"
-            data_dict[kode] = {
+            stock_dict[kode] = {
                 "nama" : nama,
                 "stock" : int(stock)
             }
-    return data_dict
+    return stock_dict
 
-###!!! Tugas Praktikkum 2 : Konsep ADT dan File Handling(Studi Kasus) !!!###
-#Tahap 2 : Membuat Fungsi Menampilkan Data
-#-------------------------------------------------------#
+# ---------------------------------------
+# Fungsi: Menyimpan Data ke File
+# ---------------------------------------
 
-def tampilkan_data(data_dict):
+def simpan_stock(nama_file,stock_dict):
+    with open(nama_file,"w", encoding="utf-8") as file :
+        for kode in sorted(stock_dict.keys()) :
+            nama = stock_dict[kode]["nama"]
+            stock = stock_dict[kode]["stock"]
+            file.write(f"{kode},{nama},{stock}\n")
+    print("Data Berhasil Disimpan")
 
-    if len(data_dict) == 0:
+# ---------------------------------------
+# Fungsi: Menampilkan Semua Data
+# ---------------------------------------
+
+def tampilkan_semua(stock_dict):
+
+    if len(stock_dict) == 0:
         print("Tidak ada data Barang")
         return
 
@@ -46,22 +58,22 @@ def tampilkan_data(data_dict):
     print(f"{"Kode" :<10} | {"Nama": <12} | {"Stock": >5}")
     print("-" * 32)
         
-    for kode in sorted(data_dict.keys()):
-        nama=data_dict[kode]["nama"]
-        stock=data_dict[kode]["stock"]
+    for kode in sorted(stock_dict.keys()):
+        nama=stock_dict[kode]["nama"]
+        stock=stock_dict[kode]["stock"]
         print(f"{kode: <10} | {nama: <12} | {stock: >5}")
 
-###!!! Tugas Praktikkum 2 : Konsep ADT dan File Handling(Studi Kasus) !!!###
-#Tahap 3 : Membuat Fungsi Mencari Data
-#-------------------------------------------------------#
+# ---------------------------------------
+# Fungsi: Cari Barang Berdasarkan Kode
+# ---------------------------------------
 
-def cari_data(data_dict):
+def cari_barang(stock_dict):
     #mencari data barang berdasarkan kode barang
     kode_cari = input("Masukkan Kode Barang yang dicari:").strip()
 
-    if kode_cari in data_dict:
-        nama = data_dict[kode_cari]["nama"]
-        stock = data_dict[kode_cari]["stock"]
+    if kode_cari in stock_dict:
+        nama = stock_dict[kode_cari]["nama"]
+        stock = stock_dict[kode_cari]["stock"]
 
         print("\n==== Data Stock Barang Ditemukan ====")
         print(f"Kode : {kode_cari}")
@@ -70,63 +82,81 @@ def cari_data(data_dict):
     else :
         print("\n Data Tidak Ditemukan")
 
-###!!! Tugas Praktikkum 2 : Konsep ADT dan File Handling(Studi Kasus) !!!###
-#Tahap 4 : Membuat Fungsi Menambahkan Barang
-#-------------------------------------------------------#
+# ---------------------------------------
+# Fungsi: Tambah Barang Baru
+# ---------------------------------------
 
-def tambah_data(data_dict):
+def tambah_barang(stock_dict):
     kode = input("Masukkan Kode Barang Baru (BRGXXX): ").strip()
     nama = input("Masukkan Nama Barang: ").strip()
-    # cek apakah kode sudah ada
-    if kode in data_dict:
-        print("Kode sudah ada. Penambahan dibatalkan.")
+    # Validasi kode tidak boleh duplikat
+    if kode in stock_dict:
+        print("Kode sudah digunakan. Penambahan dibatalkan.")
         return
 
     try:
-        stock = int(input("Masukkan Stock Barang: ").strip())
+        stock = int(input("Input Stock Awal: ").strip())
     except ValueError:
         print("Stock harus berupa angka.")
         return
 
     # simpan ke dictionary
-    data_dict[kode] = {
+    stock_dict[kode] = {
         "nama": nama,
         "stock": stock
     }
 
     print("Barang berhasil ditambahkan.")
 
-###!!! Tugas Praktikkum 2 : Konsep ADT dan File Handling(Studi Kasus) !!!###
-#Tahap 5 : Membuat Fungsi Update Stock Barang
-#-------------------------------------------------------#
+# ---------------------------------------
+# Fungsi: Update Stock Barang
+# ---------------------------------------
 
-def update_stock(data_dict):
+def update_stock(stock_dict):
     kode = input("Masukkan Kode Barang yang akan diupdate stocknya:").strip()
     
     #cari kode barang yang akan diupdate stocknya
-    if kode not in data_dict :
+    if kode not in stock_dict :
         print("Kode Barang tidak ditemukan, update dibatalkan")
         return
+    
+    stock_lama = stock_dict[kode]["stock"]
+
+    print("Pilih Jenis Update:")
+    print("1. Tambah Stock")
+    print("2. Kurangi Stock")
+
+    pilihan =  input("Masukkan pilihan (1/2):").strip()
     try:
-        stock_baru = int(input("Masukkan Stock baru: ").strip())
+        jumlah = int(input("Masukkan Jumlah: ").strip())
     except ValueError: 
-        print("Stock harus berupa angka. Update dibatalkan")
+        print("Jumlah harus berupa angka. Update dibatalkan")
         return
     
-    stock_lama = data_dict[kode]["stock"]
-    #memasukkan stock update baru ke dictionary
-    data_dict[kode]["stock"] = stock_baru
+    if pilihan == "1":
+        stock_baru = stock_lama + jumlah
+        print("Stock", kode, "anda sudah ditambahkan, stock awal:", stock_lama, "menjadi stock baru:", stock_baru)
+    elif pilihan == "2":
+        stock_baru = stock_lama - jumlah
+        print("Stock", kode, "anda sudah dikurangi, stock awal:", stock_lama, "menjadi stock baru:", stock_baru)
+    
+    # Jika stock setelah diupdate menjadi negatif, maka update dibatalkan
+    if stock_baru < 0:
+        print("tetapi Stock tidak boleh negatif, Update dibatalkan")
+        return
+    
+    # Memasukkan stock update baru ke dictionary
+    stock_dict[kode]["stock"] = stock_baru
 
-    print(f"Update berhail. stock {kode} berubah dari {stock_lama} menjadi {stock_baru}")
+# ---------------------------------------
+# Fungsi: Menghapus data barang
+# ---------------------------------------
 
-###!!! Tugas Praktikkum 2 : Konsep ADT dan File Handling(Studi Kasus) !!!###
-#Tahap 6 : Membuat Fungsi Hapus Data Barang
-#-------------------------------------------------------#
-
-def hapus_data(data_dict):
+def hapus_barang(stock_dict):
     kode = input("Masukkan Kode Barang yang akan dihapus: ").strip()
 
-    if kode not in data_dict:
+    # Validasi kode ditemukan atau tidak
+    if kode not in stock_dict:
         print("Kode barang tidak ditemukan.")
         return
 
@@ -134,29 +164,17 @@ def hapus_data(data_dict):
     konfirmasi = input(f"Yakin ingin menghapus {kode}? (y/n): ").lower()
 
     if konfirmasi == "y":
-        del data_dict[kode]
+        del stock_dict[kode]
         print("Data barang berhasil dihapus.")
     else:
         print("Penghapusan dibatalkan.")
 
-###!!! Tugas Praktikkum 2 : Konsep ADT dan File Handling(Studi Kasus) !!!###
-#Tahap 7 : Membuat Fungsi Menyimpan perubahan data ke file
-#-------------------------------------------------------#
-
-def simpan_data(nama_file,data_dict):
-    with open(nama_file,"w", encoding="utf-8") as file :
-        for kode in sorted(data_dict.keys()) :
-            nama = data_dict[kode]["nama"]
-            stock = data_dict[kode]["stock"]
-            file.write(f"{kode},{nama},{stock}\n")
-    print("Data Berhasil Disimpan")
-
-###!!! Tugas Praktikkum 2 : Konsep ADT dan File Handling(Studi Kasus) !!!###
-#Tahap 8 : Membuat Menu Program
-#-------------------------------------------------------#
+# ---------------------------------------
+# Program Utama
+# ---------------------------------------
 
 def main():
-    buka_data = baca_data_barang(nama_file)
+    buka_data = baca_stock(nama_file)
 
     while True :
         print("\n=== MENU DATA STOCK BARANG ===")
@@ -171,19 +189,19 @@ def main():
         pilihan = input("Pilihan Menu: ").strip()
 
         if pilihan == "1":
-            tampilkan_data(buka_data)
+            tampilkan_semua(buka_data)
         elif pilihan == "2":
-            cari_data(buka_data)
+            cari_barang(buka_data)
         elif pilihan == "3":
-            tambah_data(buka_data)
+            tambah_barang(buka_data)
         elif pilihan == "4":
             update_stock(buka_data)
         elif pilihan == "5":
-            hapus_data(buka_data)
+            hapus_barang(buka_data)
         elif pilihan == "6":
-            simpan_data(nama_file,buka_data)
+            simpan_stock(nama_file,buka_data)
         elif pilihan == "0":
-            print("Program Selesai")
+            print("Anda sudah keluar dari Program, Program Selesai!")
             break
         else:
             print("Pilihan tidak valid. Coba lagi")

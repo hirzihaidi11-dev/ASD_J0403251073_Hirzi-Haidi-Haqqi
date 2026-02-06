@@ -10,3 +10,4 @@ BRG009,Sprite,65
 BRG010,Mizone,10
 BRG011,Malkist,65
 BRG012,Cheetos,85
+BRG013,Magnum,75
