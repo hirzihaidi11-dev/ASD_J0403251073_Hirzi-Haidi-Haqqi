@@ -1,3 +1,9 @@
+#========IDENTITAS MAHASISWA===================
+#NAMA : Hirzi Haidi Haqqi
+#NIM : J0403251073
+#Kelas : TPL-P2
+#==============================================
+
 ###!!! Praktikkum 2 : Konsep ADT dan File Handling(Studi Kasus) !!!###
 #Latihan Dasar 1 : Membuat Fungsi Load Data 
 #-------------------------------------------------------#
