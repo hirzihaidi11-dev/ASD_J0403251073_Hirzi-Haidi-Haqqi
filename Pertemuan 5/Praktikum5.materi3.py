@@ -8,12 +8,12 @@
 # Materi Rekursif : Menjumlahkan elemen list
 # ==============================================
 
-def jumlah_list(data, index=0):
+def jumlah_list(data, index=0): # data menunjukkan sebagai list dan mengatur nilai awal index = 0
     # BASE CASE
-    if index == len(data):
+    if index == len(data): # mengecek apakah index sudah sama dengan panjang list, berarti semua elemen sudah diproses jika sudah semua maka fungsi akan mengembalikan nilai 0.
         return 0
     
-    # recursive case
+    # recursive case # -> mengambil nilai elemen pada posisi index lalu, menjumlahkannya dengan hasil pemanggilan fungsi berikutnya kemudian, pindah ke elemen selanjutnya.
     return data[index] + jumlah_list(data, index+1)
 
 print("===== Program Jumlah Data =====")

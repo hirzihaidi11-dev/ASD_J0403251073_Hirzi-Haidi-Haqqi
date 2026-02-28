@@ -14,14 +14,14 @@
 
 def hitung(n):
 
-    # BASE CASE
+    # BASE CASE -> ketika n bernilai == 0, maka rekursif akan berhenti dan mengirim pesan selesai 
     if n == 0:
         print("Selesai")
         return
     
-    print("Masuk:", n)
-    hitung(n-1) # recursive case
-    print("Keluar", n)
+    print("Masuk:", n) # -> menampilkan nilai n saat fungsi dipanggil 
+    hitung(n-1) # recursive case -> memanggil fungsi nya sendiri dan akan mengurangi nilai n sebelumnya sebanyak 1. rekursi disimpan di call stack sehingga akan menggunakan konsep LIFO. setiap pemanggilan fungsi disimpan ke stack (push). saat fungsi selesai, ia dikeluarkan dari stack (pop)
+    print("Keluar", n) 
 
 print("===== Program Tracing =====")
 hitung(5)
