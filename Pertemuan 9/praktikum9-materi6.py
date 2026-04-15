@@ -53,5 +53,5 @@ Pada kode ini akan ditampilkan Struktur Organisasi Perusahaan dengan traversal p
 dan child level 2 berupa staff 1,2,3, dan 4. Dalam menampilkan nya diawali dengan root.data yaitu Direktur, lalu child kiri root 
 terdapat Manajer A dengan root.left kemudian child kiri dari Manajer A yaitu Staf 1 dengan root.left.left dan Staf 2 dengan root.left.right(kanan).
 Kemudian menampilkan child kanan root yaitu Manajer B dengan root.right, lalu menampilkan child kiri dari Manajer B yaitu Staf 3 dengan 
-root.right.left dan Staf 4 dengan root.right.right (kanan).
+root.right.left dan Staf 4 dengan root.right.right(kanan).
 """
